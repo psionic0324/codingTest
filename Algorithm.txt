@@ -8,18 +8,73 @@
 <정렬 알고리즘>
   : 데이터를 특정한 기준에 따라 순서대로 나열하는 것
 
-  1. 선택 정렬
+
+  1. 버블 정렬
+    : 인접한 두 수를 비교하며 정렬해나간는 방법으로 O(n^2)의 느린 성능을 가지고 있다.
+
+      1. 앞에서부터 시작하여 큰 수를 뒤로 보내 뒤가 가장 큰 값을 가지도록 완성해가는 방법
+      2. 뒤에서부터 반복하여 앞의 작은 값부터 정렬을 완성해 나가는 방법
+
+      ex)
+        array = [9,8,7,6,5,4,3,2,1]
+
+        def bubble_sort(array):
+            n = len(array)
+            for i in range(n - 1):
+                for j in range(n - i - 1):
+                    if array[j] > array[j + 1]:
+                        array[j], array[j + 1] = array[j + 1], array[j]
+                print(array)
+        print("before: ",array)
+        bubble_sort(array)
+        print("after:", array)
+  
+
+  2. 선택 정렬
     : 처리되지 않은 데이터 중에서 가장 작은 데이터를 선택해 맨 앞에 있는 데이터와 바꾸는 것을 반복한다. 
+      선택 정렬의 시간복잡도 : O(N^2)
 
-    선택 정렬의 시간복잡도 : O(N^2)
+      ex)
+        array = [8,4,6,2,9,1,3,7,5]
 
-  2.삽입 정렬
+        def selection_sort(array):
+          n = len(array)
+          for i in range(n):
+            min_index = i
+            for j in range(i + 1, n):
+              if array[j] < array[min_index]:
+                min_index = j
+            array[i], array[min_index] =  array[min_index], array[i]
+            print(array[:i+1])
+
+        print("before: ",array)
+        selection_sort(array)
+        print("after:", array)
+
+
+  3.삽입 정렬
     : 처리되지 않은 데이터를 하나씩 골라 적절한 위치에 삽입한다.
-    (선택 정렬에 비해 구현 난이도가 높지만, 일반적으로 더 효율적이다.)
+      (선택 정렬에 비해 구현 난이도가 높지만, 일반적으로 더 효율적이다.)
 
-    삽입 정렬의 시간복잡도 : O(N^2) 단 최상의 경우 O(N)이 됨
+      삽입 정렬의 시간복잡도 : O(N^2) 단 최상의 경우 O(N)이 됨
 
-  3. 퀵 정렬
+      ex)
+        array = [8,4,6,2,9,1,3,7,5]
+
+        def insertion_sort(array):
+          n = len(array)
+          for i in range(1, n):
+            for j in range(i, 0, - 1):
+              if array[j - 1] > array[j]:
+                array[j - 1], array[j] = array[j], array[j - 1]
+            print(array[:i+1])
+
+        print("before: ",array)
+        insertion_sort(array)
+        print("after:", array)
+
+
+  4. 퀵 정렬
     : 기준 데이터를 설정하고 그 기준보다 큰 데이터와 작은 데이터의 위치를 바꾸는 방법.
     
     일반적인 상황에서 가장 많이 사용됨
@@ -28,7 +83,7 @@
 
     퀵 정렬의 시간복잡도 : O(NlogN) 단 최악의 경우 O(N^2)의 시간복잡도를 갖는다.
 
-  4. 계수 정렬
+  5. 계수 정렬
 
 <유클리드 호제법>
   : 2개의 자연수 또는 정시의 최대공약수를 구하는 알고리즘
