@@ -1,9 +1,26 @@
-<그리디 알고리즘 (탐욕법)>
-  : 그리디 알고리즘은 현재 상황에서 지금 당장 좋은 것만 고르는 방법
-  
-  코딩 테스트에서의 대부분의 그리디 문제는 탐욕법으로 얻은 해가 최적의 해가 되는 상황에서, 이 를 추론할 수 있어야 풀리도록 출제된다.
+<유클리드 호제법>
+  : 2개의 자연수 또는 정시의 최대공약수를 구하는 알고리즘
+  호제법이라는 말은 두 수가 서로 상대방 수를 나누어서 결국 원하는 수를 얻는 알고리즘
 
-  검증 종류가 K개라고 할때, 소스코드의 시간 복잡도는 O(K)이다.
+  2개의 자연수(또는 정식) a, b에 대해서 a를 b로 나눈 나머지를 r이라 하면(단, a>b), 
+  a와 b의 최대공약수는 b와 r의 최대공약수와 같다.
+  
+  ex)
+    def gcd(a, b):
+      while b > 0:
+        a, b = b, a % b
+      return a
+
+  (최대공약수)
+    a * b = GGx*y
+    a * b / G = GGx*y / G (양변에 최소 공약수를 나누어 줌)
+    a * b / G = Gxy(최소공배수)
+    최소공배수 = a * b / G
+
+    ex)
+      def lcm(a, b):
+        return a * b // gcd(a, b)
+
 
 <정렬 알고리즘>
   : 데이터를 특정한 기준에 따라 순서대로 나열하는 것
@@ -74,7 +91,41 @@
         print("after:", array)
 
 
-  4. 퀵 정렬
+  4. 병합 정렬
+    : 분할 정복과 재귀를 이용한 알고리즘으로 O(NlogN)의 속도이다.
+      반으로 쪼개고 다시 합치는 과정에서 그룹을 만들어 정렬하게 되며 이 과정에서
+      2n개의 공간이 필요하다.
+    
+    ex)
+      array = [8,4,6,2,9,1,3,7,5]
+
+      def merge_sort(array):
+        if len(array) < 2:
+          return array
+        mid = len(array) // 2
+        low_arr = merge_sort(array[:mid])
+        high_arr = merge_sort(array[mid:])
+
+        merged_arr = []
+        l = h = 0
+        while l < len(low_arr) and h < len(high_arr):
+          if low_arr[l] < high_arr[h]:
+            merged_arr.append(low_arr[l])
+            l += 1
+          else:
+            merged_arr.append(high_arr[h])
+            h += 1
+        merged_arr += low_arr[l:]
+        merged_arr += high_arr[h:]
+        print(merged_arr)
+        return merged_arr
+
+      print("before: ",array)
+      array = merge_sort(array)
+      print("after:", array)
+
+
+  5. 퀵 정렬
     : 기준 데이터를 설정하고 그 기준보다 큰 데이터와 작은 데이터의 위치를 바꾸는 방법.
     
     일반적인 상황에서 가장 많이 사용됨
@@ -85,25 +136,10 @@
 
   5. 계수 정렬
 
-<유클리드 호제법>
-  : 2개의 자연수 또는 정시의 최대공약수를 구하는 알고리즘
-  호제법이라는 말은 두 수가 서로 상대방 수를 나누어서 결국 원하는 수를 얻는 알고리즘
 
-  2개의 자연수(또는 정식) a, b에 대해서 a를 b로 나눈 나머지를 r이라 하면(단, a>b), 
-  a와 b의 최대공약수는 b와 r의 최대공약수와 같다.
-  
-  ex)
-    def gcd(a, b):
-      while b > 0:
-        a, b = b, a % b
-      return a
+<그리디 알고리즘 (탐욕법)>
+  : 그리디 알고리즘은 현재 상황에서 지금 당장 좋은 것만 고르는 방법
 
-  (최대공약수)
-    a * b = GGx*y
-    a * b / G = GGx*y / G (양변에 최소 공약수를 나누어 줌)
-    a * b / G = Gxy(최소공배수)
-    최소공배수 = a * b / G
+  코딩 테스트에서의 대부분의 그리디 문제는 탐욕법으로 얻은 해가 최적의 해가 되는 상황에서, 이 를 추론할 수 있어야 풀리도록 출제된다.
 
-    ex)
-      def lcm(a, b):
-        return a * b // gcd(a, b)
+  검증 종류가 K개라고 할때, 소스코드의 시간 복잡도는 O(K)이다.
