@@ -1,11 +1,9 @@
-sugar = int(input())
-bag = 0
-while sugar >= 0:
-  if sugar % 5 == 0:
-    bag += (sugar // 5)
-    print(bag)
-    break
-  sugar -= 3
-  bag += 1
-else:
-  print(-1)
+def star(n):
+  if n == 1:
+     print('*', end="")
+  print(star(n/3)) * 3
+  print(star(n/3), star(n/3))
+  print(star(n/3)) * 3
+
+n = int(input())
+print(star(n))
